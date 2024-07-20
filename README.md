@@ -48,14 +48,8 @@ Install Backend Dependencies
 bash
 Copy code
 pip install -r requirements.txt
-Create a .env File
 
-Create a .env file in the backend directory and add your API keys:
 
-makefile
-Copy code
-ASSEMBLYAI_API_KEY=your_assemblyai_api_key
-OLLAMA_API_KEY=your_ollama_api_key
 Frontend Setup
 Navigate to the Frontend Directory
 
