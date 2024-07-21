@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './App.css'; // Import the CSS file
 import QueryForm from './components/QueryForm';
 import ResponseDisplay from './components/ResponseDisplay';
 
@@ -23,12 +24,15 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div className="app-container">
       <h1>AIdialog</h1>
       <QueryForm onSubmit={handleQuerySubmit} />
-      <ResponseDisplay response={response} />
+      <div className="response-container">
+        <ResponseDisplay response={response} />
+      </div>
     </div>
   );
 };
 
 export default App;
+
