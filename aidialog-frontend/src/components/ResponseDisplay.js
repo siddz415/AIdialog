@@ -1,14 +1,17 @@
 import React from 'react';
 
+
 const ResponseDisplay = ({ response }) => {
   return (
-    <div>
+    <div className="response-container">
       <h2>Response</h2>
       {response ? (
         <div>
           <p>{response.transcript}</p>
           <p>{response.response_text}</p>
-          <audio controls src={`data:audio/mp3;base64,${response.audio_response}`} />
+          <div className="audio-player">
+            <audio controls src={`data:audio/mp3;base64,${response.audio_response}`} />
+          </div>
         </div>
       ) : (
         <p>No response yet.</p>
@@ -18,3 +21,4 @@ const ResponseDisplay = ({ response }) => {
 };
 
 export default ResponseDisplay;
+

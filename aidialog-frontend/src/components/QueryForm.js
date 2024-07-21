@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 const QueryForm = ({ onSubmit }) => {
   const [recording, setRecording] = useState(false);
   const [audioFile, setAudioFile] = useState(null);
@@ -20,7 +21,7 @@ const QueryForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="query-form" onSubmit={handleSubmit}>
       <button type="button" onClick={handleRecordClick}>
         {recording ? 'Stop Recording' : 'Start Recording'}
       </button>
