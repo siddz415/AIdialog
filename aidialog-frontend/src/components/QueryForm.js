@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import "../css/QueryForm.css"
+import axios from 'axios';
 
 
-const QueryForm = ({ onSubmit }) => {
+const QueryForm = ({ onSubmits }) => {
   const [recording, setRecording] = useState(false);
   const [audioFile, setAudioFile] = useState(null);
 
@@ -9,26 +11,51 @@ const QueryForm = ({ onSubmit }) => {
     if (recording) {
       // Stop recording
       setRecording(false);
+      setAudioFile(audioFile);
+      
     } else {
       // Start recording
       setRecording(true);
     }
   };
+  const [response, setResponse] = useState(null);
+  const handleQuerySubmit = async (audioFile) => {
+      const formData = new FormData();
+      formData.append('audio', audioFile);
+    
+      console.log(audioFile);
+  
+      try {
+        const res = await axios.post('http://localhost:5000/api/voice_query', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        setResponse(res.data);
+      } catch (error) {
+        console.error('Error fetching response:', error);
+      }
+    };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(audioFile);
+    handleQuerySubmit(audioFile);
   };
 
   return (
-    <form className="query-form" onSubmit={handleSubmit}>
+    <div className='query-form'>
+      <div className='query-heading'>
+        <h2>Query</h2>
+      </div>
+      <div className='query-body'>
+    <form onSubmit={handleSubmit}>
       <button type="button" onClick={handleRecordClick}>
         {recording ? 'Stop Recording' : 'Start Recording'}
       </button>
-      <button type="submit" disabled={!audioFile}>
+      <button type="submit" >
         Submit
       </button>
-    </form>
+    </form></div></div>
   );
 };
 
