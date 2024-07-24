@@ -12,10 +12,10 @@ app = Flask(__name__)
 
 # Retrieve API keys from environment variables
 ASSEMBLYAI_API_KEY = os.getenv('ASSEMBLYAI_API_KEY')
-OLLAMA_API_KEY = os.getenv('OLLAMA_API_KEY')
+#OLLAMA_API_KEY = os.getenv('OLLAMA_API_KEY')
 
 ASSEMBLYAI_API_URL = "https://api.assemblyai.com/v2"
-OLLAMA_API_URL = "https://api.ollama.ai/v1/query"
+OLLAMA_API_URL = " http://localhost:11434/api/generate"
 
 @app.route('/api/voice_query', methods=['POST'])
 def voice_query(): # Main function to handle voice query
@@ -54,11 +54,11 @@ def transcribe_speech(audio_file): # Function to transcribe speech using Assembl
 def query_ollama(query): # Function to query Ollama API
     response = requests.post(
         OLLAMA_API_URL,
-        json={'query': query},
-        headers={'Authorization': f'Bearer {OLLAMA_API_KEY}'}
+        json={'model':"llama3", 'prompt': query}
+        #headers={'Authorization': f'Bearer {OLLAMA_API_KEY}'}
     )
     result = response.json()
-    return result.get('text', '')
+    return result.get('response', '')
 
 def synthesize_speech(text): # Function to synthesize speech using AssemblyAI
     headers = {
