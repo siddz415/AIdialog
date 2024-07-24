@@ -1,10 +1,12 @@
 import React from 'react';
+import "../css/ResponseDisplay.css";
 
 
 const ResponseDisplay = ({ response }) => {
   return (
     <div className="response-container">
-      <h2>Response</h2>
+      <div className='resp-heading'><h2>Response</h2></div>
+      <div className='resp-body'>
       {response ? (
         <div>
           <p>{response.transcript}</p>
@@ -16,7 +18,7 @@ const ResponseDisplay = ({ response }) => {
       ) : (
         <p>No response yet.</p>
       )}
-    </div>
+    </div></div>
   );
 };
 
